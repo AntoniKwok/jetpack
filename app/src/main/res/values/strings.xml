@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">JetpackPro</string>
+    <string name="title_movie">Movie</string>
+    <string name="title_tvshow">TV Show</string>
+
+    <string name="overview">Overview</string>
+</resources>
