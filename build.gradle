@@ -7,6 +7,7 @@ buildscript {
         androidXTestVersion = '1.1.0'
         androidXAnnotations = '1.0.1'
         androidXLegacySupport = '1.0.0'
+        ankoVersion = '0.10.8'
         materialVersion = '1.0.0'
         cardVersion = '1.0.0'
         recyclerViewVersion = '1.0.0'
