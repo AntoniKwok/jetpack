@@ -4,7 +4,7 @@ import com.antoni.wijaya.jetpackpro.R
 import com.antoni.wijaya.jetpackpro.model.MovieEntity
 
 
-class DataDummy {
+class FakeData {
 
     companion object {
         fun generateTvShowDataDummy(): ArrayList<MovieEntity> {

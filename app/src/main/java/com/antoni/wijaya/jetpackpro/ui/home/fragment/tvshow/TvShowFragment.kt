@@ -14,8 +14,6 @@ import org.jetbrains.anko.support.v4.startActivity
 
 class TvShowFragment : Fragment() {
 
-    private lateinit var tvShowViewModel: TvShowViewModel
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
