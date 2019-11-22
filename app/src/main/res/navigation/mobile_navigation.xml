@@ -7,13 +7,13 @@
 
     <fragment
         android:id="@+id/navigation_movie"
-        android:name="com.antoni.wijaya.jetpackpro.ui.home.fragment.movie.HomeFragment"
+        android:name="com.antoni.wijaya.jetpackpro.ui.home.fragment.movie.MovieFragment"
         android:label="@string/title_movie"
         tools:layout="@layout/fragment_movie" />
 
     <fragment
         android:id="@+id/navigation_tvshow"
-        android:name="com.antoni.wijaya.jetpackpro.ui.home.fragment.tvshow.DashboardFragment"
+        android:name="com.antoni.wijaya.jetpackpro.ui.home.fragment.tvshow.TvShowFragment"
         android:label="@string/title_tvshow"
         tools:layout="@layout/fragment_tvshow" />
 
