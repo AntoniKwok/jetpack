@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.antoni.wijaya.jetpackpro.R
 import com.antoni.wijaya.jetpackpro.ui.detail.DetailActivity
 
@@ -15,12 +16,19 @@ import org.jetbrains.anko.support.v4.startActivity
 
 class MovieFragment : Fragment() {
 
+    lateinit var rvMovie : RecyclerView
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         return inflater.inflate(R.layout.fragment_movie, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        rvMovie = view.findViewById(R.id.rv_movie)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -36,8 +44,8 @@ class MovieFragment : Fragment() {
             }
             adapter.notifyDataSetChanged()
 
-            rv_movie.layoutManager = LinearLayoutManager(context)
-            rv_movie.adapter = adapter
+            rvMovie.layoutManager = LinearLayoutManager(context)
+            rvMovie.adapter = adapter
         }
     }
 

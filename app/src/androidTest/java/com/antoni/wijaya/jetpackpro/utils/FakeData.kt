@@ -7,7 +7,7 @@ import com.antoni.wijaya.jetpackpro.model.MovieEntity
 class FakeData {
 
     companion object {
-        fun generateTvShowDataDummy(): ArrayList<MovieEntity> {
+        private fun generateTvShowDataDummy(): ArrayList<MovieEntity> {
             val tvShows: ArrayList<MovieEntity> = arrayListOf()
 
             tvShows.add(
@@ -179,7 +179,7 @@ class FakeData {
             return null
         }
 
-        fun generateMovieDataDummy(): ArrayList<MovieEntity> {
+        private fun generateMovieDataDummy(): ArrayList<MovieEntity> {
             val movies: ArrayList<MovieEntity> = arrayListOf()
 
             movies.add(
