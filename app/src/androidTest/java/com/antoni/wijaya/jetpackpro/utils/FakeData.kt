@@ -161,25 +161,7 @@ class FakeData {
             return tvShows
         }
 
-        fun getSelectedTvShowData(id: String): MovieEntity? {
-            for (i in 0 until generateTvShowDataDummy().size) {
-                val tvShow = generateTvShowDataDummy()[i]
-                if (tvShow.id == id)
-                    return tvShow
-            }
-            return null
-        }
-
-        fun getSelectedMovieData(id: String): MovieEntity? {
-            for (i in 0 until generateMovieDataDummy().size) {
-                val movie = generateMovieDataDummy()[i]
-                if (movie.id == id)
-                    return movie
-            }
-            return null
-        }
-
-        private fun generateMovieDataDummy(): ArrayList<MovieEntity> {
+        fun generateMovieDataDummy(): ArrayList<MovieEntity> {
             val movies: ArrayList<MovieEntity> = arrayListOf()
 
             movies.add(

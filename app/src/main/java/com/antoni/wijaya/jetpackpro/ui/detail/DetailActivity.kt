@@ -37,5 +37,8 @@ class DetailActivity : AppCompatActivity() {
             rating.rating = movie.rating.toFloat() / 20
         }
 
+        btn_back.setOnClickListener {
+            finish()
+        }
     }
 }

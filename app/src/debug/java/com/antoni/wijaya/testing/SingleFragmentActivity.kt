@@ -29,8 +29,5 @@ class SingleFragmentActivity : AppCompatActivity() {
             .commit()
     }
 
-    fun replaceFragment(fragment: Fragment) {
-        supportFragmentManager.beginTransaction().add(R.id.frag_container, fragment).commit()
-    }
 
 }
