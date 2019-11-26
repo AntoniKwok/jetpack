@@ -10,9 +10,9 @@ import com.antoni.wijaya.jetpackpro.R
 
 class SingleFragmentActivity : AppCompatActivity() {
 
-    override fun onCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
-        super.onCreate(savedInstanceState, persistentState)
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
         val layout = FrameLayout(this)
         val params = FrameLayout.LayoutParams(
             FrameLayout.LayoutParams.MATCH_PARENT,
@@ -20,18 +20,17 @@ class SingleFragmentActivity : AppCompatActivity() {
             Gravity.CENTER
         )
         layout.layoutParams = params
-        layout.id = R.id.container
+        layout.id = R.id.frag_container
 
         setContentView(layout)
-
     }
 
     fun setFragment(fragment: Fragment) {
-        supportFragmentManager.beginTransaction().add(R.id.container, fragment, "TEST").commit()
+        supportFragmentManager.beginTransaction().add(R.id.frag_container, fragment, "TEST").commit()
     }
 
     fun replaceFragment(fragment: Fragment) {
-        supportFragmentManager.beginTransaction().add(R.id.container, fragment).commit()
+        supportFragmentManager.beginTransaction().add(R.id.frag_container, fragment).commit()
     }
 
 }

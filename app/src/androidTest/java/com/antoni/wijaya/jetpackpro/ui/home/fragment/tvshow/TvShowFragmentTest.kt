@@ -18,7 +18,7 @@ class TvShowFragmentTest {
 
     @Rule @JvmField var activityRule =
         ActivityTestRule<SingleFragmentActivity>(SingleFragmentActivity::class.java)
-    val tvShowFragment = TvShowFragment()
+    private val tvShowFragment = TvShowFragment()
 
     @Before
     fun setUp() {

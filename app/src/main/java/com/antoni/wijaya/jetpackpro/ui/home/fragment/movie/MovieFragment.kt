@@ -11,12 +11,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.antoni.wijaya.jetpackpro.R
 import com.antoni.wijaya.jetpackpro.ui.detail.DetailActivity
 
-import kotlinx.android.synthetic.main.fragment_movie.*
 import org.jetbrains.anko.support.v4.startActivity
 
 class MovieFragment : Fragment() {
 
-    lateinit var rvMovie : RecyclerView
+    private lateinit var rvMovie : RecyclerView
 
     override fun onCreateView(
         inflater: LayoutInflater,
