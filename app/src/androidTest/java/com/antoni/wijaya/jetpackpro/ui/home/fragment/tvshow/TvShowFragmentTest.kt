@@ -16,7 +16,9 @@ import org.junit.runner.RunWith
 @RunWith(AndroidJUnit4::class)
 class TvShowFragmentTest {
 
-    @Rule @JvmField var activityRule =
+    @Rule
+    @JvmField
+    var activityRule =
         ActivityTestRule<SingleFragmentActivity>(SingleFragmentActivity::class.java)
     private val tvShowFragment = TvShowFragment()
 

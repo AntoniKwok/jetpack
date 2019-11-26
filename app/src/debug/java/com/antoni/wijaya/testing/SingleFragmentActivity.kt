@@ -1,7 +1,6 @@
 package com.antoni.wijaya.testing
 
 import android.os.Bundle
-import android.os.PersistableBundle
 import android.view.Gravity
 import android.widget.FrameLayout
 import androidx.appcompat.app.AppCompatActivity
@@ -26,7 +25,8 @@ class SingleFragmentActivity : AppCompatActivity() {
     }
 
     fun setFragment(fragment: Fragment) {
-        supportFragmentManager.beginTransaction().add(R.id.frag_container, fragment, "TEST").commit()
+        supportFragmentManager.beginTransaction().add(R.id.frag_container, fragment, "TEST")
+            .commit()
     }
 
     fun replaceFragment(fragment: Fragment) {

@@ -1,16 +1,12 @@
 package com.antoni.wijaya.jetpackpro.ui.home.activity
 
 import android.os.Bundle
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.setupActionBarWithNavController
-import androidx.navigation.ui.setupWithNavController
 import com.antoni.wijaya.jetpackpro.R
 import com.antoni.wijaya.jetpackpro.ui.home.fragment.movie.MovieFragment
 import com.antoni.wijaya.jetpackpro.ui.home.fragment.tvshow.TvShowFragment
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class HomeActivity : AppCompatActivity() {
 
@@ -22,13 +18,14 @@ class HomeActivity : AppCompatActivity() {
         navView.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener)
     }
 
-    private val onNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
-        when (item.itemId) {
-            R.id.navigation_movie ->loadFragment(MovieFragment())
-            R.id.navigation_tvshow -> loadFragment(TvShowFragment())
+    private val onNavigationItemSelectedListener =
+        BottomNavigationView.OnNavigationItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.navigation_movie -> loadFragment(MovieFragment())
+                R.id.navigation_tvshow -> loadFragment(TvShowFragment())
+            }
+            true
         }
-        true
-    }
 
     private fun loadFragment(fragment: Fragment?): Boolean {
         if (fragment != null) {
