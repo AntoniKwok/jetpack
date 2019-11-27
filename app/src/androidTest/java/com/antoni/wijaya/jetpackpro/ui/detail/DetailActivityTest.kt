@@ -37,7 +37,7 @@ class DetailActivityTest {
         onView(withId(R.id.txt_title)).check(matches(withText(movieDummy.title)))
 
         onView(withId(R.id.txt_date)).check(matches(isDisplayed()))
-        onView(withId(R.id.txt_date)).check(matches(withText(movieDummy.released_date)))
+        onView(withId(R.id.txt_date)).check(matches(withText(movieDummy.releasedDate)))
 
         onView(withId(R.id.txt_genre)).check(matches(isDisplayed()))
         onView(withId(R.id.txt_genre)).check(matches(withText(movieDummy.genres)))

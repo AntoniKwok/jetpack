@@ -10,7 +10,7 @@ import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.item_shows.view.*
 
 class TvShowAdapter(
-    private val movies: ArrayList<MovieEntity>,
+    private val tvShows: ArrayList<MovieEntity>,
     private val listener: (MovieEntity) -> Unit
 ) :
     RecyclerView.Adapter<TvShowAdapter.TvShowViewHolder>() {
@@ -20,28 +20,27 @@ class TvShowAdapter(
         return TvShowViewHolder(view)
     }
 
-    override fun getItemCount(): Int = movies.size
+    override fun getItemCount(): Int = tvShows.size
 
     override fun onBindViewHolder(holder: TvShowViewHolder, position: Int) {
-        val movie = movies[position]
-        holder.bind(movie, listener)
+        val tvShow= tvShows[position]
+        holder.bind(tvShow)
+        holder.itemView.setOnClickListener {
+            listener(tvShow)
+        }
     }
 
 
     class TvShowViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
-        fun bind(movie: MovieEntity, listener: (MovieEntity) -> Unit) {
+        fun bind(movie: MovieEntity) {
             itemView.txt_title.text = movie.title
-            itemView.txt_date.text = movie.released_date
+            itemView.txt_date.text = movie.releasedDate
             itemView.txt_genre.text = movie.genres
             Glide.with(itemView.context)
                 .load(movie.image)
                 .into(itemView.img_poster)
             itemView.rating_bar.rating = movie.rating.toFloat() / 20
-
-            itemView.setOnClickListener {
-                listener(movie)
-            }
         }
 
     }

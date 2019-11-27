@@ -6,8 +6,13 @@ import com.antoni.wijaya.jetpackpro.utils.DataDummy
 
 class TvShowViewModel : ViewModel() {
 
+    private var tvShows : ArrayList<MovieEntity>? = null
+
     fun getTvShows(): ArrayList<MovieEntity> {
-        return DataDummy.generateTvShowDataDummy()
+        if(tvShows==null){
+            tvShows = DataDummy.generateTvShowDataDummy()
+        }
+        return tvShows ?: arrayListOf()
     }
 
 }

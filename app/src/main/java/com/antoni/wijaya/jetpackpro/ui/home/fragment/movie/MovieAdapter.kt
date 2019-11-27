@@ -25,25 +25,25 @@ class MovieAdapter(
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
 
         val movie = movies[position]
-        holder.bind(movie, listener)
+        holder.bind(movie)
+        holder.itemView.setOnClickListener {
+            listener(movie)
+        }
 
     }
 
 
     class MovieViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
-        fun bind(movie: MovieEntity, listener: (MovieEntity) -> Unit) {
+        fun bind(movie: MovieEntity) {
             itemView.txt_title.text = movie.title
-            itemView.txt_date.text = movie.released_date
+            itemView.txt_date.text = movie.releasedDate
             itemView.txt_genre.text = movie.genres
             Glide.with(itemView.context)
                 .load(movie.image)
                 .into(itemView.img_poster)
             itemView.rating_bar.rating = movie.rating.toFloat() / 20
 
-            itemView.setOnClickListener {
-                listener(movie)
-            }
         }
 
     }

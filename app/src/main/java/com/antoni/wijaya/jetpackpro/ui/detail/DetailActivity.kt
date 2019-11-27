@@ -31,7 +31,7 @@ class DetailActivity : AppCompatActivity() {
 
             txt_title.text = movie.title
             txt_desc.text = movie.desc
-            txt_date.text = movie.released_date
+            txt_date.text = movie.releasedDate
             txt_genre.text = movie.genres
             txt_toolbar.text = movie.title
             rating.rating = movie.rating.toFloat() / 20

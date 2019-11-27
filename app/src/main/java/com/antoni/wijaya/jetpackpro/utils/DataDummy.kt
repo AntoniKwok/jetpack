@@ -162,8 +162,9 @@ class DataDummy {
         }
 
         fun getSelectedTvShowData(id: String): MovieEntity? {
-            for (i in 0 until generateTvShowDataDummy().size) {
-                val tvShow = generateTvShowDataDummy()[i]
+            val shows = generateTvShowDataDummy()
+            for (i in 0 until shows.size) {
+                val tvShow = shows[i]
                 if (tvShow.id == id)
                     return tvShow
             }
@@ -171,8 +172,9 @@ class DataDummy {
         }
 
         fun getSelectedMovieData(id: String): MovieEntity? {
-            for (i in 0 until generateMovieDataDummy().size) {
-                val movie = generateMovieDataDummy()[i]
+            val shows = generateMovieDataDummy()
+            for (i in 0 until shows.size) {
+                val movie = shows[i]
                 if (movie.id == id)
                     return movie
             }

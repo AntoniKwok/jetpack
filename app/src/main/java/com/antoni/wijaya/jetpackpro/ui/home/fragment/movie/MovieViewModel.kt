@@ -6,7 +6,11 @@ import com.antoni.wijaya.jetpackpro.utils.DataDummy
 
 class MovieViewModel : ViewModel() {
 
+    private var movies : ArrayList<MovieEntity>? = null
+
     fun getMovies(): ArrayList<MovieEntity> {
-        return DataDummy.generateMovieDataDummy()
+        if(movies == null)
+            movies = DataDummy.generateMovieDataDummy()
+        return movies ?: arrayListOf()
     }
 }
