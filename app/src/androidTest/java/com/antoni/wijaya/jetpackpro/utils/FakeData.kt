@@ -1,17 +1,17 @@
 package com.antoni.wijaya.jetpackpro.utils
 
 import com.antoni.wijaya.jetpackpro.R
-import com.antoni.wijaya.jetpackpro.model.MovieEntity
+import com.antoni.wijaya.jetpackpro.data.model.MovieValue
 
 
 class FakeData {
 
     companion object {
-        private fun generateTvShowDataDummy(): ArrayList<MovieEntity> {
-            val tvShows: ArrayList<MovieEntity> = arrayListOf()
+        private fun generateTvShowDataDummy(): ArrayList<MovieValue> {
+            val tvShows: ArrayList<MovieValue> = arrayListOf()
 
             tvShows.add(
-                MovieEntity
+                MovieValue
                     (
                     "1412",
                     "Arrow",
@@ -24,7 +24,7 @@ class FakeData {
             )
 
             tvShows.add(
-                MovieEntity
+                MovieValue
                     (
                     "12609",
                     "Dragon Ball",
@@ -37,7 +37,7 @@ class FakeData {
             )
 
             tvShows.add(
-                MovieEntity
+                MovieValue
                     (
                     "46261",
                     "Fairy Tail",
@@ -52,7 +52,7 @@ class FakeData {
 
 
             tvShows.add(
-                MovieEntity
+                MovieValue
                     (
                     "1434",
                     "Family Guy",
@@ -65,7 +65,7 @@ class FakeData {
             )
 
             tvShows.add(
-                MovieEntity
+                MovieValue
                     (
                     "60735",
                     "The Flash",
@@ -78,7 +78,7 @@ class FakeData {
             )
 
             tvShows.add(
-                MovieEntity
+                MovieValue
                     (
                     "60708",
                     "Gotham",
@@ -93,7 +93,7 @@ class FakeData {
             )
 
             tvShows.add(
-                MovieEntity
+                MovieValue
                     (
                     "62127",
                     "Marvel's Iron Fist",
@@ -106,7 +106,7 @@ class FakeData {
             )
 
             tvShows.add(
-                MovieEntity
+                MovieValue
                     (
                     "54155",
                     "Hanna",
@@ -119,7 +119,7 @@ class FakeData {
             )
 
             tvShows.add(
-                MovieEntity
+                MovieValue
                     (
                     "34307",
                     "Shameless",
@@ -132,7 +132,7 @@ class FakeData {
             )
 
             tvShows.add(
-                MovieEntity
+                MovieValue
                     (
                     "31910",
                     "Naruto Shippūden",
@@ -145,7 +145,7 @@ class FakeData {
             )
 
             tvShows.add(
-                MovieEntity
+                MovieValue
                     (
                     "62688",
                     "Supergirl",
@@ -161,11 +161,11 @@ class FakeData {
             return tvShows
         }
 
-        fun generateMovieDataDummy(): ArrayList<MovieEntity> {
-            val movies: ArrayList<MovieEntity> = arrayListOf()
+        fun generateMovieDataDummy(): ArrayList<MovieValue> {
+            val movies: ArrayList<MovieValue> = arrayListOf()
 
             movies.add(
-                MovieEntity
+                MovieValue
                     (
                     "332562",
                     "A Star Is Born",
@@ -178,7 +178,7 @@ class FakeData {
             )
 
             movies.add(
-                MovieEntity
+                MovieValue
                     (
                     "297802",
                     "Aquaman",
@@ -191,7 +191,7 @@ class FakeData {
             )
 
             movies.add(
-                MovieEntity
+                MovieValue
                     (
                     "299536",
                     "Avengers: Infinity War",
@@ -204,7 +204,7 @@ class FakeData {
             )
 
             movies.add(
-                MovieEntity
+                MovieValue
                     (
                     "324857",
                     "Spider-Man: Into the Spider-Verse",
@@ -217,7 +217,7 @@ class FakeData {
             )
 
             movies.add(
-                MovieEntity
+                MovieValue
                     (
                     "424694",
                     "Bohemian Rhapsody",
@@ -230,7 +230,7 @@ class FakeData {
             )
 
             movies.add(
-                MovieEntity
+                MovieValue
                     (
                     "480530",
                     "Creed II",
@@ -243,7 +243,7 @@ class FakeData {
             )
 
             movies.add(
-                MovieEntity
+                MovieValue
                     (
                     "399579",
                     "Alita: Battle Angel",
@@ -256,7 +256,7 @@ class FakeData {
             )
 
             movies.add(
-                MovieEntity
+                MovieValue
                     (
                     "166428",
                     "How to Train Your Dragon: The Hidden World",
@@ -269,7 +269,7 @@ class FakeData {
             )
 
             movies.add(
-                MovieEntity
+                MovieValue
                     (
                     "505954",
                     "T-34",
@@ -282,7 +282,7 @@ class FakeData {
             )
 
             movies.add(
-                MovieEntity
+                MovieValue
                     (
                     "438799",
                     "Overlord",
@@ -295,7 +295,7 @@ class FakeData {
             )
 
             movies.add(
-                MovieEntity
+                MovieValue
                     (
                     "404368",
                     "Ralph Breaks the Internet",

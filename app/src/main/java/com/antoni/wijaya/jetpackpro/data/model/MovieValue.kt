@@ -1,10 +1,10 @@
-package com.antoni.wijaya.jetpackpro.model
+package com.antoni.wijaya.jetpackpro.data.model
 
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-data class MovieEntity(
+data class MovieValue(
     var id : String,
     var title: String,
     var desc: String,

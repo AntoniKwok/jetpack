@@ -1,17 +1,17 @@
 package com.antoni.wijaya.jetpackpro.utils
 
 import com.antoni.wijaya.jetpackpro.R
-import com.antoni.wijaya.jetpackpro.model.MovieEntity
+import com.antoni.wijaya.jetpackpro.data.model.MovieValue
 
 
 class DataDummy {
 
     companion object {
-        fun generateTvShowDataDummy(): ArrayList<MovieEntity> {
-            val tvShows: ArrayList<MovieEntity> = arrayListOf()
+        fun generateTvShowDataDummy(): ArrayList<MovieValue> {
+            val tvShows: ArrayList<MovieValue> = arrayListOf()
 
             tvShows.add(
-                MovieEntity
+                MovieValue
                     (
                     "1412",
                     "Arrow",
@@ -24,7 +24,7 @@ class DataDummy {
             )
 
             tvShows.add(
-                MovieEntity
+                MovieValue
                     (
                     "12609",
                     "Dragon Ball",
@@ -37,7 +37,7 @@ class DataDummy {
             )
 
             tvShows.add(
-                MovieEntity
+                MovieValue
                     (
                     "46261",
                     "Fairy Tail",
@@ -52,7 +52,7 @@ class DataDummy {
 
 
             tvShows.add(
-                MovieEntity
+                MovieValue
                     (
                     "1434",
                     "Family Guy",
@@ -65,7 +65,7 @@ class DataDummy {
             )
 
             tvShows.add(
-                MovieEntity
+                MovieValue
                     (
                     "60735",
                     "The Flash",
@@ -78,7 +78,7 @@ class DataDummy {
             )
 
             tvShows.add(
-                MovieEntity
+                MovieValue
                     (
                     "60708",
                     "Gotham",
@@ -93,7 +93,7 @@ class DataDummy {
             )
 
             tvShows.add(
-                MovieEntity
+                MovieValue
                     (
                     "62127",
                     "Marvel's Iron Fist",
@@ -106,7 +106,7 @@ class DataDummy {
             )
 
             tvShows.add(
-                MovieEntity
+                MovieValue
                     (
                     "54155",
                     "Hanna",
@@ -119,7 +119,7 @@ class DataDummy {
             )
 
             tvShows.add(
-                MovieEntity
+                MovieValue
                     (
                     "34307",
                     "Shameless",
@@ -132,7 +132,7 @@ class DataDummy {
             )
 
             tvShows.add(
-                MovieEntity
+                MovieValue
                     (
                     "31910",
                     "Naruto Shippūden",
@@ -145,7 +145,7 @@ class DataDummy {
             )
 
             tvShows.add(
-                MovieEntity
+                MovieValue
                     (
                     "62688",
                     "Supergirl",
@@ -161,7 +161,7 @@ class DataDummy {
             return tvShows
         }
 
-        fun getSelectedTvShowData(id: String): MovieEntity? {
+        fun getSelectedTvShowData(id: String): MovieValue? {
             val shows = generateTvShowDataDummy()
             for (i in 0 until shows.size) {
                 val tvShow = shows[i]
@@ -171,7 +171,7 @@ class DataDummy {
             return null
         }
 
-        fun getSelectedMovieData(id: String): MovieEntity? {
+        fun getSelectedMovieData(id: String): MovieValue? {
             val shows = generateMovieDataDummy()
             for (i in 0 until shows.size) {
                 val movie = shows[i]
@@ -181,11 +181,11 @@ class DataDummy {
             return null
         }
 
-        fun generateMovieDataDummy(): ArrayList<MovieEntity> {
-            val movies: ArrayList<MovieEntity> = arrayListOf()
+        fun generateMovieDataDummy(): ArrayList<MovieValue> {
+            val movies: ArrayList<MovieValue> = arrayListOf()
 
             movies.add(
-                MovieEntity
+                MovieValue
                     (
                     "332562",
                     "A Star Is Born",
@@ -198,7 +198,7 @@ class DataDummy {
             )
 
             movies.add(
-                MovieEntity
+                MovieValue
                     (
                     "297802",
                     "Aquaman",
@@ -211,7 +211,7 @@ class DataDummy {
             )
 
             movies.add(
-                MovieEntity
+                MovieValue
                     (
                     "299536",
                     "Avengers: Infinity War",
@@ -224,7 +224,7 @@ class DataDummy {
             )
 
             movies.add(
-                MovieEntity
+                MovieValue
                     (
                     "324857",
                     "Spider-Man: Into the Spider-Verse",
@@ -237,7 +237,7 @@ class DataDummy {
             )
 
             movies.add(
-                MovieEntity
+                MovieValue
                     (
                     "424694",
                     "Bohemian Rhapsody",
@@ -250,7 +250,7 @@ class DataDummy {
             )
 
             movies.add(
-                MovieEntity
+                MovieValue
                     (
                     "480530",
                     "Creed II",
@@ -263,7 +263,7 @@ class DataDummy {
             )
 
             movies.add(
-                MovieEntity
+                MovieValue
                     (
                     "399579",
                     "Alita: Battle Angel",
@@ -276,7 +276,7 @@ class DataDummy {
             )
 
             movies.add(
-                MovieEntity
+                MovieValue
                     (
                     "166428",
                     "How to Train Your Dragon: The Hidden World",
@@ -289,7 +289,7 @@ class DataDummy {
             )
 
             movies.add(
-                MovieEntity
+                MovieValue
                     (
                     "505954",
                     "T-34",
@@ -302,7 +302,7 @@ class DataDummy {
             )
 
             movies.add(
-                MovieEntity
+                MovieValue
                     (
                     "438799",
                     "Overlord",
@@ -315,7 +315,7 @@ class DataDummy {
             )
 
             movies.add(
-                MovieEntity
+                MovieValue
                     (
                     "404368",
                     "Ralph Breaks the Internet",
