@@ -6,12 +6,13 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.antoni.wijaya.jetpackpro.R
 import com.antoni.wijaya.jetpackpro.data.model.MovieValue
+import com.antoni.wijaya.jetpackpro.data.source.local.entity.TvShowEntity
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.item_shows.view.*
 
 class TvShowAdapter(
-    private val tvShows: ArrayList<MovieValue>,
-    private val listener: (MovieValue) -> Unit
+    private val tvShows: ArrayList<TvShowEntity>,
+    private val listener: (TvShowEntity) -> Unit
 ) :
     RecyclerView.Adapter<TvShowAdapter.TvShowViewHolder>() {
 
@@ -33,14 +34,14 @@ class TvShowAdapter(
 
     class TvShowViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
-        fun bind(movie: MovieValue) {
+        fun bind(movie: TvShowEntity) {
             itemView.txt_title.text = movie.title
-            itemView.txt_date.text = movie.releasedDate
+            itemView.txt_date.text = movie.releaseDate
             itemView.txt_genre.text = movie.genres
             Glide.with(itemView.context)
-                .load(movie.image)
+                .load(movie.imageUrl)
                 .into(itemView.img_poster)
-            itemView.rating_bar.rating = movie.rating.toFloat() / 20
+            itemView.rating_bar.rating = movie.rating!!.toFloat() / 20
         }
 
     }

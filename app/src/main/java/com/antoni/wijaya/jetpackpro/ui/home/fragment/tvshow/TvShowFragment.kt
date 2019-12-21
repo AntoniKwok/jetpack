@@ -5,10 +5,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.antoni.wijaya.jetpackpro.R
 import com.antoni.wijaya.jetpackpro.ui.detail.DetailActivity
+import com.antoni.wijaya.jetpackpro.viewmodel.ViewModelFactory
 import kotlinx.android.synthetic.main.fragment_tvshow.*
 import org.jetbrains.anko.support.v4.startActivity
 
@@ -26,9 +28,9 @@ class TvShowFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
 
         if (activity != null) {
-            val tvShowViewModel = ViewModelProviders.of(this).get(TvShowViewModel::class.java)
+            val tvShowViewModel = obtainViewModel(activity)
 
-            val adapter = TvShowAdapter(tvShowViewModel.getTvShows()) {
+            val adapter = TvShowAdapter(tvShowViewModel!!.getTvShows()) {
                 startActivity<DetailActivity>(
                     DetailActivity.ID to it.id,
                     DetailActivity.TYPE to "tv"
@@ -39,5 +41,11 @@ class TvShowFragment : Fragment() {
             rv_tv_show.layoutManager = LinearLayoutManager(context)
             rv_tv_show.adapter = adapter
         }
+    }
+
+    private fun obtainViewModel(activity: FragmentActivity?) : TvShowViewModel? {
+        val factory = activity?.application?.let { ViewModelFactory.getInstance(it) }
+
+        return activity?.let { ViewModelProviders.of(it, factory).get(TvShowViewModel::class.java) }
     }
 }

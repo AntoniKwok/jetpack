@@ -10,7 +10,7 @@ class TvShowViewModelTest{
 
     @Before
     fun setUp(){
-        viewModel = TvShowViewModel()
+        viewModel = TvShowViewModel(movieRepository)
     }
 
     @Test

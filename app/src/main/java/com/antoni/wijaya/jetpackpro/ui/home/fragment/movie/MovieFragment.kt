@@ -5,11 +5,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.antoni.wijaya.jetpackpro.R
 import com.antoni.wijaya.jetpackpro.ui.detail.DetailActivity
+import com.antoni.wijaya.jetpackpro.viewmodel.ViewModelFactory
 
 import org.jetbrains.anko.support.v4.startActivity
 
@@ -33,9 +35,9 @@ class MovieFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         if (activity != null) {
-            val movieViewModel = ViewModelProviders.of(this).get(MovieViewModel::class.java)
+            val movieViewModel = obtainViewModel(activity)
 
-            val adapter = MovieAdapter(movieViewModel.getMovies()) {
+            val adapter = MovieAdapter(movieViewModel!!.getMovies()) {
                 startActivity<DetailActivity>(
                     DetailActivity.ID to it.id,
                     DetailActivity.TYPE to "movie"
@@ -46,6 +48,12 @@ class MovieFragment : Fragment() {
             rvMovie.layoutManager = LinearLayoutManager(context)
             rvMovie.adapter = adapter
         }
+    }
+
+    private fun obtainViewModel(activity: FragmentActivity?) : MovieViewModel? {
+        val factory = activity?.application?.let { ViewModelFactory.getInstance(it) }
+
+        return activity?.let { ViewModelProviders.of(it, factory).get(MovieViewModel::class.java) }
     }
 
 }
