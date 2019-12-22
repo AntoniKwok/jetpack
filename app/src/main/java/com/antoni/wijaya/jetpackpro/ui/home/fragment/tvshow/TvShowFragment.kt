@@ -6,11 +6,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.antoni.wijaya.jetpackpro.R
+import com.antoni.wijaya.jetpackpro.data.source.local.entity.TvShowEntity
 import com.antoni.wijaya.jetpackpro.ui.detail.DetailActivity
 import com.antoni.wijaya.jetpackpro.viewmodel.ViewModelFactory
+import com.antoni.wijaya.jetpackpro.vo.Status
 import kotlinx.android.synthetic.main.fragment_tvshow.*
 import org.jetbrains.anko.support.v4.startActivity
 
@@ -30,16 +33,23 @@ class TvShowFragment : Fragment() {
         if (activity != null) {
             val tvShowViewModel = obtainViewModel(activity)
 
-            val adapter = TvShowAdapter(tvShowViewModel!!.getTvShows()) {
-                startActivity<DetailActivity>(
-                    DetailActivity.ID to it.id,
-                    DetailActivity.TYPE to "tv"
-                )
-            }
-            adapter.notifyDataSetChanged()
-
-            rv_tv_show.layoutManager = LinearLayoutManager(context)
-            rv_tv_show.adapter = adapter
+            tvShowViewModel?.getTvShows()?.observe(this, Observer { it ->
+                run {
+                    when (it.status) {
+                        Status.SUCCESS -> {
+                            val adapter = TvShowAdapter(it.data as ArrayList<TvShowEntity>) {
+                                startActivity<DetailActivity>(
+                                    DetailActivity.ID to it.id,
+                                    DetailActivity.TYPE to "movie"
+                                )
+                            }
+                            adapter.notifyDataSetChanged()
+                            rv_tv_show.layoutManager = LinearLayoutManager(context)
+                            rv_tv_show.adapter = adapter
+                        }
+                    }
+                }
+            })
         }
     }
 

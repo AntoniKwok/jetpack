@@ -1,9 +1,11 @@
 package com.antoni.wijaya.jetpackpro.data.source.remote
 
+import androidx.lifecycle.LiveData
 import com.antoni.wijaya.jetpackpro.data.source.local.entity.MovieEntity
 import com.antoni.wijaya.jetpackpro.data.source.local.entity.TvShowEntity
+import com.antoni.wijaya.jetpackpro.vo.Resource
 
 interface MovieDataSource {
-    fun getMovieData(): ArrayList<MovieEntity>?
-    fun getTvShowData(): ArrayList<TvShowEntity>?
+    fun getMovieData(): LiveData<Resource<List<MovieEntity>>>
+    fun getTvShowData(): LiveData<Resource<List<TvShowEntity>>>
 }

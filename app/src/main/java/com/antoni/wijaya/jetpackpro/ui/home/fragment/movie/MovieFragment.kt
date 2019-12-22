@@ -6,18 +6,21 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.antoni.wijaya.jetpackpro.R
+import com.antoni.wijaya.jetpackpro.data.source.local.entity.MovieEntity
 import com.antoni.wijaya.jetpackpro.ui.detail.DetailActivity
 import com.antoni.wijaya.jetpackpro.viewmodel.ViewModelFactory
+import com.antoni.wijaya.jetpackpro.vo.Status
 
 import org.jetbrains.anko.support.v4.startActivity
 
 class MovieFragment : Fragment() {
 
-    private lateinit var rvMovie : RecyclerView
+    private lateinit var rvMovie: RecyclerView
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -37,22 +40,33 @@ class MovieFragment : Fragment() {
         if (activity != null) {
             val movieViewModel = obtainViewModel(activity)
 
-            val adapter = MovieAdapter(movieViewModel!!.getMovies()) {
-                startActivity<DetailActivity>(
-                    DetailActivity.ID to it.id,
-                    DetailActivity.TYPE to "movie"
-                )
-            }
-            adapter.notifyDataSetChanged()
+//            val adapter =
+//            adapter?.notifyDataSetChanged()
 
-            rvMovie.layoutManager = LinearLayoutManager(context)
-            rvMovie.adapter = adapter
+            movieViewModel?.getMovies()?.observe(this, Observer { it ->
+                run {
+                    when (it.status) {
+                        Status.SUCCESS -> {
+                            val adapter = MovieAdapter(it.data as ArrayList<MovieEntity>) {
+                                startActivity<DetailActivity>(
+                                    DetailActivity.ID to it.id,
+                                    DetailActivity.TYPE to "movie"
+                                )
+                            }
+                            adapter.notifyDataSetChanged()
+                            rvMovie.layoutManager = LinearLayoutManager(context)
+                            rvMovie.adapter = adapter
+                        }
+                    }
+                }
+            })
+
+
         }
     }
 
-    private fun obtainViewModel(activity: FragmentActivity?) : MovieViewModel? {
+    private fun obtainViewModel(activity: FragmentActivity?): MovieViewModel? {
         val factory = activity?.application?.let { ViewModelFactory.getInstance(it) }
-
         return activity?.let { ViewModelProviders.of(it, factory).get(MovieViewModel::class.java) }
     }
 
