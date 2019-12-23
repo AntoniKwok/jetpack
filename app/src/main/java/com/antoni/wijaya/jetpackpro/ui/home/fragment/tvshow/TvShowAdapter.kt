@@ -36,7 +36,7 @@ class TvShowAdapter(
 
         fun bind(movie: TvShowEntity) {
             itemView.txt_title.text = movie.title
-            itemView.txt_date.text = movie.releaseDate
+            itemView.txt_date.text = movie.releasedDate
             itemView.txt_genre.text = movie.genres
             Glide.with(itemView.context)
                 .load(movie.imageUrl)

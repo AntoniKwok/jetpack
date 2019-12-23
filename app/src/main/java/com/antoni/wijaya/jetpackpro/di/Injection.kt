@@ -10,18 +10,20 @@ import com.antoni.wijaya.jetpackpro.utils.JsonHelper
 
 class Injection {
 
-    companion object{
+    companion object {
 
-        fun provideRepository(application: Application) : MovieRepository? {
+        fun provideRepository(application: Application): MovieRepository? {
             val remoteRepository = RemoteRepository.getInstance(JsonHelper(application))
 
-            val database =MovieDatabase.getInstance(application)
+            val database = MovieDatabase.getInstance(application)
             val localRepository = database?.movieDao()?.let { LocalRepository.getInstance(it) }
 
             val appExecutors = AppExecutors()
             return localRepository?.let {
-                MovieRepository.getInstance(remoteRepository,
-                    it, appExecutors)
+                MovieRepository.getInstance(
+                    remoteRepository,
+                    it, appExecutors
+                )
             }
         }
 

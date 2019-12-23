@@ -5,6 +5,7 @@ import com.antoni.wijaya.jetpackpro.data.source.local.LocalRepository
 import com.antoni.wijaya.jetpackpro.data.source.local.entity.MovieEntity
 import com.antoni.wijaya.jetpackpro.data.source.local.entity.TvShowEntity
 import com.antoni.wijaya.jetpackpro.data.source.remote.repository.RemoteRepository
+import com.antoni.wijaya.jetpackpro.data.source.remote.response.ApiResponse
 import com.antoni.wijaya.jetpackpro.data.source.remote.response.MovieResponse
 import com.antoni.wijaya.jetpackpro.data.source.remote.response.TvShowResponse
 import com.antoni.wijaya.jetpackpro.utils.AppExecutors
@@ -46,9 +47,18 @@ class MovieRepository(
                 return data.isEmpty()
             }
 
-            override fun createCall(): LiveData<ApiResponse<List<MovieResponse>>>? = null
+            override fun createCall(): LiveData<ApiResponse<List<MovieResponse>>>? = remoteRepository?.getMovieData()
 
-            override fun saveCallResult(body: List<MovieResponse>) {}
+            override fun saveCallResult(body: List<MovieResponse>) {
+                val movieEntity = ArrayList<MovieEntity>()
+
+                for(movie in body){
+                    movieEntity.add(MovieEntity(movie.id, movie.title, movie.desc, movie.rating, movie.genres, movie.releasedDate, movie.image))
+                }
+
+                localRepository.insertMovie(movieEntity)
+
+            }
 
         }.asLiveData()
     }
@@ -64,9 +74,49 @@ class MovieRepository(
                 return data.isEmpty()
             }
 
-            override fun createCall(): LiveData<ApiResponse<List<TvShowResponse>>>? = null
+            override fun createCall(): LiveData<ApiResponse<List<TvShowResponse>>>? = remoteRepository?.getTvShowData()
 
-            override fun saveCallResult(body: List<TvShowResponse>) {}
+            override fun saveCallResult(body: List<TvShowResponse>) {
+                val tvShowEntity = ArrayList<TvShowEntity>()
+
+                for(movie in body){
+                    tvShowEntity.add(TvShowEntity(movie.id, movie.title, movie.desc, movie.rating, movie.genres, movie.releasedDate, movie.image))
+                }
+
+                localRepository.insertTvShow(tvShowEntity)
+            }
+
+        }.asLiveData()
+    }
+
+    override fun getMovieDetail(id : String): LiveData<Resource<MovieEntity>> {
+        return object :
+            NetworkBoundResource<MovieEntity, MovieResponse>(appExecutors) {
+            override fun loadFromDB(): LiveData<MovieEntity> {
+                return localRepository.getDetailMovie(id)
+            }
+
+            override fun shouldFetch(data: MovieEntity): Boolean = false
+
+            override fun createCall(): LiveData<ApiResponse<MovieResponse>>? = null
+
+            override fun saveCallResult(body: MovieResponse) {}
+
+        }.asLiveData()
+    }
+
+    override fun getTvShowDetail(id : String): LiveData<Resource<TvShowEntity>> {
+        return object :
+            NetworkBoundResource<TvShowEntity, TvShowResponse>(appExecutors) {
+            override fun loadFromDB(): LiveData<TvShowEntity> {
+                return localRepository.getDetailTvShow(id)
+            }
+
+            override fun shouldFetch(data: TvShowEntity): Boolean = false
+
+            override fun createCall(): LiveData<ApiResponse<TvShowResponse>>? = null
+
+            override fun saveCallResult(body: TvShowResponse) {}
 
         }.asLiveData()
     }

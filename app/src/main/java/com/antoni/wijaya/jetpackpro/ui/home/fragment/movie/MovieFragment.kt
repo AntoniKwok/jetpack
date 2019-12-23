@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.Observer
@@ -15,6 +16,7 @@ import com.antoni.wijaya.jetpackpro.data.source.local.entity.MovieEntity
 import com.antoni.wijaya.jetpackpro.ui.detail.DetailActivity
 import com.antoni.wijaya.jetpackpro.viewmodel.ViewModelFactory
 import com.antoni.wijaya.jetpackpro.vo.Status
+import kotlinx.android.synthetic.main.fragment_movie.*
 
 import org.jetbrains.anko.support.v4.startActivity
 
@@ -40,13 +42,15 @@ class MovieFragment : Fragment() {
         if (activity != null) {
             val movieViewModel = obtainViewModel(activity)
 
-//            val adapter =
-//            adapter?.notifyDataSetChanged()
-
             movieViewModel?.getMovies()?.observe(this, Observer { it ->
                 run {
                     when (it.status) {
+                        Status.ERROR -> {
+                            Toast.makeText(context, "Failed to get Movie Data", Toast.LENGTH_SHORT)
+                                .show()
+                        }
                         Status.SUCCESS -> {
+                            progress_bar.visibility = View.GONE
                             val adapter = MovieAdapter(it.data as ArrayList<MovieEntity>) {
                                 startActivity<DetailActivity>(
                                     DetailActivity.ID to it.id,
@@ -56,6 +60,9 @@ class MovieFragment : Fragment() {
                             adapter.notifyDataSetChanged()
                             rvMovie.layoutManager = LinearLayoutManager(context)
                             rvMovie.adapter = adapter
+                        }
+                        Status.LOADING -> {
+                            progress_bar.visibility = View.VISIBLE
                         }
                     }
                 }

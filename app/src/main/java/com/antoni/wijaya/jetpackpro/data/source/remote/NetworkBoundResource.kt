@@ -3,6 +3,8 @@ package com.antoni.wijaya.jetpackpro.data.source.remote
 import android.annotation.SuppressLint
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
+import com.antoni.wijaya.jetpackpro.data.source.remote.response.ApiResponse
+import com.antoni.wijaya.jetpackpro.data.source.remote.response.StatusResponse
 import com.antoni.wijaya.jetpackpro.utils.AppExecutors
 import com.antoni.wijaya.jetpackpro.vo.Resource
 

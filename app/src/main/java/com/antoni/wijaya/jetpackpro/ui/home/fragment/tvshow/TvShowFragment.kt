@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.Observer
@@ -36,7 +37,15 @@ class TvShowFragment : Fragment() {
             tvShowViewModel?.getTvShows()?.observe(this, Observer { it ->
                 run {
                     when (it.status) {
+                        Status.ERROR -> {
+                            rv_tv_show.visibility = View.GONE
+                            progress_bar.visibility = View.VISIBLE
+                            Toast.makeText(context, "Failed to get Movie Data", Toast.LENGTH_SHORT)
+                                .show()
+                        }
                         Status.SUCCESS -> {
+                            progress_bar.visibility = View.GONE
+                            rv_tv_show.visibility = View.VISIBLE
                             val adapter = TvShowAdapter(it.data as ArrayList<TvShowEntity>) {
                                 startActivity<DetailActivity>(
                                     DetailActivity.ID to it.id,
@@ -47,13 +56,17 @@ class TvShowFragment : Fragment() {
                             rv_tv_show.layoutManager = LinearLayoutManager(context)
                             rv_tv_show.adapter = adapter
                         }
+                        Status.LOADING -> {
+                            rv_tv_show.visibility = View.GONE
+                            progress_bar.visibility = View.VISIBLE
+                        }
                     }
                 }
             })
         }
     }
 
-    private fun obtainViewModel(activity: FragmentActivity?) : TvShowViewModel? {
+    private fun obtainViewModel(activity: FragmentActivity?): TvShowViewModel? {
         val factory = activity?.application?.let { ViewModelFactory.getInstance(it) }
 
         return activity?.let { ViewModelProviders.of(it, factory).get(TvShowViewModel::class.java) }

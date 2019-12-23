@@ -3,8 +3,7 @@ package com.antoni.wijaya.jetpackpro.data.source.remote.repository
 import android.os.Handler
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.antoni.wijaya.jetpackpro.data.source.local.entity.MovieEntity
-import com.antoni.wijaya.jetpackpro.data.source.remote.ApiResponse
+import com.antoni.wijaya.jetpackpro.data.source.remote.response.ApiResponse
 import com.antoni.wijaya.jetpackpro.data.source.remote.response.MovieResponse
 import com.antoni.wijaya.jetpackpro.data.source.remote.response.TvShowResponse
 import com.antoni.wijaya.jetpackpro.utils.EspressoIdlingResource

@@ -8,4 +8,6 @@ import com.antoni.wijaya.jetpackpro.vo.Resource
 interface MovieDataSource {
     fun getMovieData(): LiveData<Resource<List<MovieEntity>>>
     fun getTvShowData(): LiveData<Resource<List<TvShowEntity>>>
+    fun getMovieDetail(id : String): LiveData<Resource<MovieEntity>>
+    fun getTvShowDetail(id : String): LiveData<Resource<TvShowEntity>>
 }

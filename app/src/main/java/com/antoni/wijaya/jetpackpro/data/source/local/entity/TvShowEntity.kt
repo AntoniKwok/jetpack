@@ -27,7 +27,7 @@ data class TvShowEntity(
     val genres: String? = "",
 
     @ColumnInfo(name = "released_date")
-    val releaseDate: String? = "",
+    val releasedDate: String? = "",
 
     @ColumnInfo(name = "image_url")
     val imageUrl: String? = ""

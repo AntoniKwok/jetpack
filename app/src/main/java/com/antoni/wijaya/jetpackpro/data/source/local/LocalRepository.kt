@@ -27,4 +27,22 @@ class LocalRepository(private val dao: MovieDAO) {
         return dao.getTvShowData()
     }
 
+    fun getDetailMovie(id : String) : LiveData<MovieEntity>{
+        return dao.getDetailMovieData(id)
+    }
+
+    fun getDetailTvShow(id : String) : LiveData<TvShowEntity>{
+        return dao.getDetailTvShowData(id)
+    }
+
+    fun insertMovie(movie : List<MovieEntity>){
+        dao.insertMovieData(movie)
+    }
+
+    fun insertTvShow(movie : List<TvShowEntity>){
+        dao.insertTvShowData(movie)
+    }
+
+
+
 }
