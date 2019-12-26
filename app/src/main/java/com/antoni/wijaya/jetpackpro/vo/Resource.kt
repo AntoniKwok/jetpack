@@ -8,30 +8,30 @@ class Resource<T>(
     val message: String?
 ) {
 
-    companion object{
-        fun <T> success(data : T) : Resource<T>{
+    companion object {
+        fun <T> success(data: T): Resource<T> {
             return Resource(Status.SUCCESS, data, null)
         }
 
-        fun <T> error(msg : String, data : T) : Resource<T>{
+        fun <T> error(msg: String, data: T): Resource<T> {
             return Resource(Status.ERROR, data, msg)
         }
 
-        fun <T> loading(@NonNull data : T?) : Resource<T> {
+        fun <T> loading(@NonNull data: T?): Resource<T> {
             return Resource(Status.LOADING, data, null)
         }
     }
 
     override fun equals(other: Any?): Boolean {
-        if(this === other)
+        if (this === other)
             return true
 
-        if(other == null || javaClass != other.javaClass)
+        if (other == null || javaClass != other.javaClass)
             return false
 
         val resource = other as Resource<*>
 
-        if(status !== resource.status)
+        if (status !== resource.status)
             return false
 
         if (message != resource.message)
@@ -51,7 +51,6 @@ class Resource<T>(
     override fun toString(): String {
         return "Resource{status=$status, message=' $message '\'', data=$data '}'"
     }
-
 
 
 }

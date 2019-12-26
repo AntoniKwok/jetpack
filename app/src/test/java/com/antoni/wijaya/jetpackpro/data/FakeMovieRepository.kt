@@ -1,9 +1,12 @@
-package com.antoni.wijaya.jetpackpro.data.source.remote
+package com.antoni.wijaya.jetpackpro.data
 
 import androidx.lifecycle.LiveData
 import com.antoni.wijaya.jetpackpro.data.source.local.LocalRepository
 import com.antoni.wijaya.jetpackpro.data.source.local.entity.MovieEntity
 import com.antoni.wijaya.jetpackpro.data.source.local.entity.TvShowEntity
+import com.antoni.wijaya.jetpackpro.data.source.remote.MovieDataSource
+import com.antoni.wijaya.jetpackpro.data.source.remote.MovieRepository
+import com.antoni.wijaya.jetpackpro.data.source.remote.NetworkBoundResource
 import com.antoni.wijaya.jetpackpro.data.source.remote.repository.RemoteRepository
 import com.antoni.wijaya.jetpackpro.data.source.remote.response.ApiResponse
 import com.antoni.wijaya.jetpackpro.data.source.remote.response.MovieResponse
@@ -11,12 +14,11 @@ import com.antoni.wijaya.jetpackpro.data.source.remote.response.TvShowResponse
 import com.antoni.wijaya.jetpackpro.utils.AppExecutors
 import com.antoni.wijaya.jetpackpro.vo.Resource
 
-class MovieRepository(
+class FakeMovieRepository(
     private val remoteRepository: RemoteRepository?,
     private val localRepository: LocalRepository,
     private val appExecutors: AppExecutors
-) : MovieDataSource {
-
+) : MovieDataSource{
     companion object {
         @Volatile
         private var INSTANCE: MovieRepository? = null
@@ -144,6 +146,5 @@ class MovieRepository(
 
         }.asLiveData()
     }
-
 
 }

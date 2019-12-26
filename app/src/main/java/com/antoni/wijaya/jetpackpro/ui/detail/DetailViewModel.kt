@@ -10,17 +10,21 @@ import com.antoni.wijaya.jetpackpro.data.source.remote.MovieRepository
 import com.antoni.wijaya.jetpackpro.vo.Resource
 
 class DetailViewModel(
+    var id: String = "",
     private val movieRepository: MovieRepository?
 ) : ViewModel() {
 
     private val movieId = MutableLiveData<String>()
 
-    fun getMovie(id : String) : LiveData<Resource<MovieEntity>> =
-        Transformations.switchMap(movieId){ movieRepository?.getMovieDetail(id) }
+    fun getMovie(): LiveData<Resource<MovieEntity>> =
+        Transformations.switchMap(movieId) { movieRepository?.getMovieDetail(id) }
 
-    fun getTvShow(id : String) : LiveData<Resource<TvShowEntity>> =
-        Transformations.switchMap(movieId){ movieRepository?.getTvShowDetail(id) }
+    fun getTvShow(): LiveData<Resource<TvShowEntity>> =
+        Transformations.switchMap(movieId) { movieRepository?.getTvShowDetail(id) }
 
+    fun setUsername(username: String) {
+        movieId.value = username
+    }
 
 
 }

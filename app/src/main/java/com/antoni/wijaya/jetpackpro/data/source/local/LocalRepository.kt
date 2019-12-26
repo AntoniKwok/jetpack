@@ -7,10 +7,10 @@ import com.antoni.wijaya.jetpackpro.data.source.local.room.MovieDAO
 
 class LocalRepository(private val dao: MovieDAO) {
 
-    companion object{
+    companion object {
         private var INSTANCE: LocalRepository? = null
-        fun getInstance(dao: MovieDAO) : LocalRepository?{
-            if(INSTANCE == null){
+        fun getInstance(dao: MovieDAO): LocalRepository? {
+            if (INSTANCE == null) {
                 INSTANCE = LocalRepository(dao)
             }
 
@@ -19,30 +19,29 @@ class LocalRepository(private val dao: MovieDAO) {
 
     }
 
-    fun getAllMovie() : LiveData<List<MovieEntity>>{
+    fun getAllMovie(): LiveData<List<MovieEntity>> {
         return dao.getMovieData()
     }
 
-    fun getAllTvShow() : LiveData<List<TvShowEntity>>{
+    fun getAllTvShow(): LiveData<List<TvShowEntity>> {
         return dao.getTvShowData()
     }
 
-    fun getDetailMovie(id : String) : LiveData<MovieEntity>{
+    fun getDetailMovie(id: String): LiveData<MovieEntity> {
         return dao.getDetailMovieData(id)
     }
 
-    fun getDetailTvShow(id : String) : LiveData<TvShowEntity>{
+    fun getDetailTvShow(id: String): LiveData<TvShowEntity> {
         return dao.getDetailTvShowData(id)
     }
 
-    fun insertMovie(movie : List<MovieEntity>){
+    fun insertMovie(movie: List<MovieEntity>) {
         dao.insertMovieData(movie)
     }
 
-    fun insertTvShow(movie : List<TvShowEntity>){
+    fun insertTvShow(movie: List<TvShowEntity>) {
         dao.insertTvShowData(movie)
     }
-
 
 
 }

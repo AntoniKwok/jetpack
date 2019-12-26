@@ -16,7 +16,8 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        buildConfigField("String", "API_KEY", '"b650046bf640e7bf7054093854b8d02a"')
+        buildConfigField("String", "API_KEY", '"63e0af70d4221bd7b3d260f63cd9547f"')
+        buildConfigField("String", "BASE_URL", "\"https://api.themoviedb.org/3/\"")
     }
     buildTypes {
         release {
@@ -27,6 +28,10 @@ android {
             applicationIdSuffix ".debug"
             debuggable true
         }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
 }
 
@@ -77,6 +82,8 @@ dependencies {
     testImplementation "org.hamcrest:hamcrest-all:$hamcrestVersion"
     testImplementation "org.mockito:mockito-core:$mockitoVersion"
     testImplementation "androidx.arch.core:core-testing:$archLifecycleVersion"
+    testImplementation 'org.mockito:mockito-inline:3.2.0'
+    testImplementation "com.nhaarman.mockitokotlin2:mockito-kotlin:2.2.0"
 
 
     // Dependencies for Android unit tests
@@ -108,5 +115,9 @@ dependencies {
 
     implementation 'androidx.test.espresso:espresso-idling-resource:3.2.0'
     androidTestImplementation 'androidx.test:rules:1.2.0'
+
+    //Dependencies retrofit
+    implementation 'com.squareup.retrofit2:retrofit:2.6.2'
+    implementation 'com.squareup.retrofit2:converter-gson:2.6.2'
 
 }

@@ -3,6 +3,7 @@ package com.antoni.wijaya.jetpackpro.data.source.remote.repository
 import android.os.Handler
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.antoni.wijaya.jetpackpro.data.source.local.entity.MovieEntity
 import com.antoni.wijaya.jetpackpro.data.source.remote.response.ApiResponse
 import com.antoni.wijaya.jetpackpro.data.source.remote.response.MovieResponse
 import com.antoni.wijaya.jetpackpro.data.source.remote.response.TvShowResponse
@@ -27,12 +28,12 @@ class RemoteRepository(private val jsonHelper: JsonHelper) {
 
     fun getMovieData(): LiveData<ApiResponse<List<MovieResponse>>>? {
         EspressoIdlingResource.increment()
-        val resultMovie : MutableLiveData<ApiResponse<List<MovieResponse>>> = MutableLiveData()
+        val resultMovie: MutableLiveData<ApiResponse<List<MovieResponse>>> = MutableLiveData()
 
         val handler = Handler()
         handler.postDelayed({
             resultMovie.value = ApiResponse.success(jsonHelper.getMovieData())
-            if(!EspressoIdlingResource.getEspressoIdlingResource().isIdleNow){
+            if (!EspressoIdlingResource.getEspressoIdlingResource().isIdleNow) {
                 EspressoIdlingResource.decrement()
             }
         }, SERVICE_LATENCY_IN_MILLIS.toLong())
@@ -42,13 +43,13 @@ class RemoteRepository(private val jsonHelper: JsonHelper) {
 
     fun getTvShowData(): LiveData<ApiResponse<List<TvShowResponse>>>? {
         EspressoIdlingResource.increment()
-        val resultTvShow : MutableLiveData<ApiResponse<List<TvShowResponse>>> = MutableLiveData()
+        val resultTvShow: MutableLiveData<ApiResponse<List<TvShowResponse>>> = MutableLiveData()
 
         val handler = Handler()
 
         handler.postDelayed({
             resultTvShow.value = ApiResponse.success(jsonHelper.getTvShowData())
-            if(!EspressoIdlingResource.getEspressoIdlingResource().isIdleNow)
+            if (!EspressoIdlingResource.getEspressoIdlingResource().isIdleNow)
                 EspressoIdlingResource.decrement()
 
         }, SERVICE_LATENCY_IN_MILLIS.toLong())
@@ -57,4 +58,12 @@ class RemoteRepository(private val jsonHelper: JsonHelper) {
         return resultTvShow
     }
 
+    interface LoadMovieCallback{
+        fun onAllMovieReceived(movieResponse: ArrayList<MovieEntity>)
+        fun onDataEmpty()
+    }
+    interface LoadTvShowCallback{
+        fun onAllTvShowReceived(movieResponse : List<TvShowResponse>)
+        fun onDataEmpty()
+    }
 }

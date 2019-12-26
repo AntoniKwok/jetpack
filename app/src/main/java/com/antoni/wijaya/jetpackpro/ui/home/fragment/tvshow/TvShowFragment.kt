@@ -49,7 +49,7 @@ class TvShowFragment : Fragment() {
                             val adapter = TvShowAdapter(it.data as ArrayList<TvShowEntity>) {
                                 startActivity<DetailActivity>(
                                     DetailActivity.ID to it.id,
-                                    DetailActivity.TYPE to "movie"
+                                    DetailActivity.TYPE to "tvshows"
                                 )
                             }
                             adapter.notifyDataSetChanged()

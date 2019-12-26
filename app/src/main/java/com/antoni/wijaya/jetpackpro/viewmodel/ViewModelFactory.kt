@@ -12,9 +12,17 @@ import com.antoni.wijaya.jetpackpro.ui.home.fragment.tvshow.TvShowViewModel
 class ViewModelFactory(private val movieRepository: MovieRepository?) :
     ViewModelProvider.NewInstanceFactory() {
 
+
+
+    constructor(movieRepository: MovieRepository? = null, movieId : String = "") : this(movieRepository){
+        id = movieId
+    }
+
     companion object {
         @Volatile
         private var INSTANCE: ViewModelFactory? = null
+
+        private var id = ""
 
         fun getInstance(application: Application): ViewModelFactory? {
             if (INSTANCE == null) {
@@ -24,6 +32,18 @@ class ViewModelFactory(private val movieRepository: MovieRepository?) :
                     }
                 }
             }
+            return INSTANCE
+        }
+
+        fun getInstanceDetail(application: Application): ViewModelProvider.Factory? {
+            if (INSTANCE == null) {
+                synchronized(ViewModelFactory::class.java) {
+                    if (INSTANCE == null) {
+                        INSTANCE = ViewModelFactory(Injection.provideRepository(application), id)
+                    }
+                }
+            }
+
             return INSTANCE
         }
 
@@ -38,7 +58,7 @@ class ViewModelFactory(private val movieRepository: MovieRepository?) :
                 movieRepository
             ) as T
             modelClass.isAssignableFrom(DetailViewModel::class.java) -> DetailViewModel(
-                movieRepository
+                id, movieRepository
             ) as T
             else -> throw IllegalArgumentException(modelClass.name)
         }

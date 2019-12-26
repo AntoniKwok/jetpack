@@ -7,7 +7,7 @@ import java.util.concurrent.Executor
 import java.util.concurrent.Executors
 
 @VisibleForTesting
-class AppExecutors (
+open class AppExecutors (
     private val diskIO : Executor,
     private val networkIO : Executor,
     private val mainThread : Executor
@@ -22,6 +22,7 @@ class AppExecutors (
         Executors.newFixedThreadPool(THREAD_COUNT),
         MainThreadExecutor()
     )
+
 
     fun diskIO(): Executor {
         return diskIO

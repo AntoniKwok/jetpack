@@ -5,7 +5,6 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.antoni.wijaya.jetpackpro.R
@@ -29,23 +28,31 @@ class DetailActivity : AppCompatActivity() {
         val id = intent.extras?.get(ID).toString()
         val type = intent.extras?.get(TYPE).toString()
 
+        if (viewModel != null) {
+            viewModel.id = id
+            viewModel.setUsername("Antoni")
+        }
 //        val movie = viewModel.getSelectedShow(type, id)
         layout.visibility = View.GONE
-        if(type == "movie"){
+//
+        if (type == "movie") {
             Log.wtf("Test", "Woi")
-            viewModel?.getMovie(id)?.observe(this, Observer{
+            viewModel?.getMovie()?.observe(this, Observer {
 
                 when (it.status) {
                     Status.ERROR -> {
                         layout.visibility = View.GONE
-                        Toast.makeText(this@DetailActivity, "Failed to get data", Toast.LENGTH_SHORT)
+                        Toast.makeText(
+                            this@DetailActivity,
+                            "Failed to get data",
+                            Toast.LENGTH_SHORT
+                        )
                             .show()
                     }
                     Status.SUCCESS -> {
-                        Toast.makeText(this@DetailActivity, "Success", Toast.LENGTH_SHORT)
-                            .show()
-                        progress_bar.visibility = View.GONE
+
                         layout.visibility = View.VISIBLE
+                        progress_bar.visibility = View.GONE
                         val movie = it.data
 
                         if (movie != null) {
@@ -67,14 +74,20 @@ class DetailActivity : AppCompatActivity() {
                     }
                 }
             })
-        }else{
-            viewModel?.getTvShow(id)?.observe(this, Observer{
+        } else {
+            viewModel?.getTvShow()?.observe(this, Observer {
                 when (it.status) {
                     Status.ERROR -> {
-                        Toast.makeText(this@DetailActivity, "Failed to get data", Toast.LENGTH_SHORT)
+                        layout.visibility = View.GONE
+                        Toast.makeText(
+                            this@DetailActivity,
+                            "Failed to get data",
+                            Toast.LENGTH_SHORT
+                        )
                             .show()
                     }
                     Status.SUCCESS -> {
+                        layout.visibility = View.VISIBLE
                         progress_bar.visibility = View.GONE
                         val movie = it.data
 
@@ -93,6 +106,7 @@ class DetailActivity : AppCompatActivity() {
                     }
                     Status.LOADING -> {
                         progress_bar.visibility = View.VISIBLE
+                        layout.visibility = View.GONE
                     }
                 }
             })
@@ -106,7 +120,7 @@ class DetailActivity : AppCompatActivity() {
     }
 
     private fun obtainViewModel(activity: AppCompatActivity): DetailViewModel? {
-        val factory = ViewModelFactory.getInstance(activity.application)
+        val factory = ViewModelFactory.getInstanceDetail(activity.application)
         return ViewModelProviders.of(activity, factory).get(DetailViewModel::class.java)
     }
 }
