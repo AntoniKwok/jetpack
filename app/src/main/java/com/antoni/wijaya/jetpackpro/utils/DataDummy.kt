@@ -7,7 +7,7 @@ import com.antoni.wijaya.jetpackpro.data.model.MovieValue
 class DataDummy {
 
     companion object {
-        fun generateTvShowDataDummy(): ArrayList<MovieValue> {
+        private fun generateTvShowDataDummy(): ArrayList<MovieValue> {
             val tvShows: ArrayList<MovieValue> = arrayListOf()
 
             tvShows.add(
@@ -181,7 +181,7 @@ class DataDummy {
             return null
         }
 
-        fun generateMovieDataDummy(): ArrayList<MovieValue> {
+        private fun generateMovieDataDummy(): ArrayList<MovieValue> {
             val movies: ArrayList<MovieValue> = arrayListOf()
 
             movies.add(

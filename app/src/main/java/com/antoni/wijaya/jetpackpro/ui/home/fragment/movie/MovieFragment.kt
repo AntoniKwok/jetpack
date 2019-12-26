@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -19,10 +20,14 @@ import com.antoni.wijaya.jetpackpro.vo.Status
 import kotlinx.android.synthetic.main.fragment_movie.*
 
 import org.jetbrains.anko.support.v4.startActivity
+import javax.inject.Inject
 
 class MovieFragment : Fragment() {
 
     private lateinit var rvMovie: RecyclerView
+
+    @Inject
+    var factory: ViewModelProvider.Factory? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -41,39 +46,35 @@ class MovieFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
         if (activity != null) {
             val movieViewModel = obtainViewModel(activity)
-
+            movieViewModel?.getMovies()?.removeObservers(this)
             movieViewModel?.getMovies()?.observe(this, Observer { it ->
-                run {
-                    when (it.status) {
-                        Status.ERROR -> {
-                            Toast.makeText(context, "Failed to get Movie Data", Toast.LENGTH_SHORT)
-                                .show()
+                when (it.status) {
+                    Status.ERROR -> {
+                        Toast.makeText(context, "Failed to get Movie Data", Toast.LENGTH_SHORT)
+                            .show()
+                    }
+                    Status.SUCCESS -> {
+                        progress_bar.visibility = View.GONE
+                        val adapter = MovieAdapter(it.data as ArrayList<MovieEntity>) {
+                            startActivity<DetailActivity>(
+                                DetailActivity.ID to it.id,
+                                DetailActivity.TYPE to "movie"
+                            )
                         }
-                        Status.SUCCESS -> {
-                            progress_bar.visibility = View.GONE
-                            val adapter = MovieAdapter(it.data as ArrayList<MovieEntity>) {
-                                startActivity<DetailActivity>(
-                                    DetailActivity.ID to it.id,
-                                    DetailActivity.TYPE to "movie"
-                                )
-                            }
-                            adapter.notifyDataSetChanged()
-                            rvMovie.layoutManager = LinearLayoutManager(context)
-                            rvMovie.adapter = adapter
-                        }
-                        Status.LOADING -> {
-                            progress_bar.visibility = View.VISIBLE
-                        }
+                        adapter.notifyDataSetChanged()
+                        rvMovie.layoutManager = LinearLayoutManager(context)
+                        rvMovie.adapter = adapter
+                    }
+                    Status.LOADING -> {
+                        progress_bar.visibility = View.VISIBLE
                     }
                 }
             })
-
-
         }
     }
 
     private fun obtainViewModel(activity: FragmentActivity?): MovieViewModel? {
-        val factory = activity?.application?.let { ViewModelFactory.getInstance(it) }
+        factory = activity?.application?.let { ViewModelFactory.getInstance(it) }
         return activity?.let { ViewModelProviders.of(it, factory).get(MovieViewModel::class.java) }
     }
 

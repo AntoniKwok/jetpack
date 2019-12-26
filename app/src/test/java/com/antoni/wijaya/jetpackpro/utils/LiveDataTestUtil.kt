@@ -19,6 +19,7 @@ class LiveDataTestUtil {
                     liveData?.removeObserver(this)
                 }
             }
+
             liveData?.observeForever(observer)
             latch.await(2, TimeUnit.SECONDS)
 

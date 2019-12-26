@@ -6,8 +6,8 @@ import androidx.test.espresso.idling.CountingIdlingResource
 class EspressoIdlingResource {
 
     companion object{
-        const val RESOURCE = "GLOBAL"
-        val countingIdlingResource = CountingIdlingResource(RESOURCE)
+        private const val RESOURCE = "GLOBAL"
+        private val countingIdlingResource = CountingIdlingResource(RESOURCE)
 
         fun increment(){
             countingIdlingResource.increment()

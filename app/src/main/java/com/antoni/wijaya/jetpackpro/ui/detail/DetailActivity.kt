@@ -36,7 +36,6 @@ class DetailActivity : AppCompatActivity() {
         layout.visibility = View.GONE
 //
         if (type == "movie") {
-            Log.wtf("Test", "Woi")
             viewModel?.getMovie()?.observe(this, Observer {
 
                 when (it.status) {

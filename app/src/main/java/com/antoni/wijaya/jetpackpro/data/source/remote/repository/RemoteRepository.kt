@@ -58,12 +58,4 @@ class RemoteRepository(private val jsonHelper: JsonHelper) {
         return resultTvShow
     }
 
-    interface LoadMovieCallback{
-        fun onAllMovieReceived(movieResponse: ArrayList<MovieEntity>)
-        fun onDataEmpty()
-    }
-    interface LoadTvShowCallback{
-        fun onAllTvShowReceived(movieResponse : List<TvShowResponse>)
-        fun onDataEmpty()
-    }
 }

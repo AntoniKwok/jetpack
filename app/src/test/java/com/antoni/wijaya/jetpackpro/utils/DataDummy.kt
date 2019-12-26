@@ -2,7 +2,6 @@ package com.antoni.wijaya.jetpackpro.utils
 
 import com.antoni.wijaya.jetpackpro.data.source.local.entity.MovieEntity
 import com.antoni.wijaya.jetpackpro.data.source.local.entity.TvShowEntity
-import com.antoni.wijaya.jetpackpro.vo.Resource
 
 class DataDummy {
     companion object {

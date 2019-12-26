@@ -18,7 +18,7 @@ class FakeMovieRepository(
     private val remoteRepository: RemoteRepository?,
     private val localRepository: LocalRepository,
     private val appExecutors: AppExecutors
-) : MovieDataSource{
+) : MovieDataSource {
     companion object {
         @Volatile
         private var INSTANCE: MovieRepository? = null

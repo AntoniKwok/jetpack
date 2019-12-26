@@ -44,7 +44,8 @@ class DetailViewModelTest {
 //        assertEquals(dummyShow.image, show?.image)
 //    }
     private val movieRepository = mock(MovieRepository::class.java)
-    private lateinit var viewModel: DetailViewModel
+    private lateinit var movieViewModel: DetailViewModel
+    private lateinit var tvViewModel: DetailViewModel
     private val dummyMovie = DataDummy.generateMovieDataDummy()[0]
     private val dummyTvShow = DataDummy.generateTvShowDataDummy()[0]
 
@@ -54,8 +55,8 @@ class DetailViewModelTest {
 
     @Before
     fun setUp() {
-        viewModel = DetailViewModel(dummyMovie.id, movieRepository)
-        viewModel = DetailViewModel(dummyTvShow.id, movieRepository)
+        movieViewModel = DetailViewModel(dummyMovie.id, movieRepository)
+        tvViewModel = DetailViewModel(dummyTvShow.id, movieRepository)
     }
 
     @After
@@ -66,13 +67,15 @@ class DetailViewModelTest {
     @Test
     fun getMovieDetail() {
         val resource: Resource<MovieEntity> = Resource.success(dummyMovie)
-        val movieData = MutableLiveData<Resource<MovieEntity>>()
-        movieData.value = Resource.success(dummyMovie)
+        val movieData = MutableLiveData<Resource<MovieEntity>>().also {
+            it.value = resource
+        }
 
         `when`(movieRepository.getMovieDetail(dummyMovie.id)).thenReturn(movieData)
 
-        val observer = mock(Observer::class.java) as Observer<in Resource<MovieEntity>>
-        viewModel.getMovie().observeForever(observer)
+        val observer = mock(Observer::class.java) as Observer<Resource<MovieEntity>>
+        movieViewModel.setUsername("Antoni")
+        movieViewModel.getMovie().observeForever(observer)
 
         verify(observer).onChanged(resource)
     }
@@ -85,8 +88,9 @@ class DetailViewModelTest {
 
         `when`(movieRepository.getTvShowDetail(dummyTvShow.id)).thenReturn(movieData)
 
-        val observer = mock(Observer::class.java) as Observer<in Resource<TvShowEntity>>
-        viewModel.getTvShow().observeForever(observer)
+        val observer = mock(Observer::class.java) as Observer<Resource<TvShowEntity>>
+        tvViewModel.setUsername("Wijaya")
+        tvViewModel.getTvShow().observeForever(observer)
 
         verify(observer).onChanged(resource)
     }

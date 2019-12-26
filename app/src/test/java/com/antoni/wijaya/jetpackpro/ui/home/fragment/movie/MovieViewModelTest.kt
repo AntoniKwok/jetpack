@@ -15,9 +15,9 @@ import org.junit.Test
 import org.mockito.Mockito.*
 
 
-class MovieViewModelTest{
+class MovieViewModelTest {
 
-    private lateinit var viewModel : MovieViewModel
+    private lateinit var viewModel: MovieViewModel
     private val movieRepository = mock(MovieRepository::class.java)
 
     @Rule
@@ -25,20 +25,20 @@ class MovieViewModelTest{
     var instantTaskExecutorRule = InstantTaskExecutorRule()
 
     @Before
-    fun setUp(){
+    fun setUp() {
         viewModel = MovieViewModel(movieRepository)
     }
 
     @Test
-    fun getMovies(){
-        val movies : ArrayList<MovieEntity> = DataDummy.generateMovieDataDummy()
+    fun getMovies() {
+        val movies: ArrayList<MovieEntity> = DataDummy.generateMovieDataDummy()
 
         val movieData = MutableLiveData<Resource<List<MovieEntity>>>()
         movieData.value = Resource.success(movies)
 
         `when`(movieRepository.getMovieData()).thenReturn(movieData)
 
-        val observer = mock(Observer::class.java)as Observer<in Resource<List<MovieEntity>>>
+        val observer = mock(Observer::class.java) as Observer<in Resource<List<MovieEntity>>>
         viewModel.getMovies()?.observeForever(observer)
 
         verify(observer).onChanged(Resource.success(movies))
