@@ -20,12 +20,19 @@ import org.jetbrains.anko.support.v4.startActivity
 
 class TvShowFragment : Fragment() {
 
+    private lateinit var adapter: TvShowAdapter
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         return inflater.inflate(R.layout.fragment_tvshow, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        rv_tv_show.layoutManager = LinearLayoutManager(context)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -46,15 +53,15 @@ class TvShowFragment : Fragment() {
                         Status.SUCCESS -> {
                             progress_bar.visibility = View.GONE
                             rv_tv_show.visibility = View.VISIBLE
-                            val adapter = TvShowAdapter(it.data as ArrayList<TvShowEntity>) {
+                            adapter = TvShowAdapter(it.data as ArrayList<TvShowEntity>) {
                                 startActivity<DetailActivity>(
                                     DetailActivity.ID to it.id,
                                     DetailActivity.TYPE to "tvshows"
                                 )
                             }
-                            adapter.notifyDataSetChanged()
-                            rv_tv_show.layoutManager = LinearLayoutManager(context)
                             rv_tv_show.adapter = adapter
+                            adapter.notifyDataSetChanged()
+
                         }
                         Status.LOADING -> {
                             rv_tv_show.visibility = View.GONE

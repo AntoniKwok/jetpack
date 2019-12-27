@@ -25,6 +25,7 @@ import javax.inject.Inject
 class MovieFragment : Fragment() {
 
     private lateinit var rvMovie: RecyclerView
+    private lateinit var adapter: MovieAdapter
 
     @Inject
     var factory: ViewModelProvider.Factory? = null
@@ -40,6 +41,7 @@ class MovieFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         rvMovie = view.findViewById(R.id.rv_movie)
+        rvMovie.layoutManager = LinearLayoutManager(context)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -55,15 +57,14 @@ class MovieFragment : Fragment() {
                     }
                     Status.SUCCESS -> {
                         progress_bar.visibility = View.GONE
-                        val adapter = MovieAdapter(it.data as ArrayList<MovieEntity>) {
+                        adapter = MovieAdapter(it.data as ArrayList<MovieEntity>) {
                             startActivity<DetailActivity>(
                                 DetailActivity.ID to it.id,
                                 DetailActivity.TYPE to "movie"
                             )
                         }
-                        adapter.notifyDataSetChanged()
-                        rvMovie.layoutManager = LinearLayoutManager(context)
                         rvMovie.adapter = adapter
+                        adapter.notifyDataSetChanged()
                     }
                     Status.LOADING -> {
                         progress_bar.visibility = View.VISIBLE

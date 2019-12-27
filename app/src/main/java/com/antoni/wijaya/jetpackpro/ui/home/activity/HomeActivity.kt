@@ -14,7 +14,8 @@ class HomeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
         val navView: BottomNavigationView = findViewById(R.id.nav_view)
-        loadFragment(MovieFragment())
+        if (savedInstanceState == null)
+            loadFragment(MovieFragment())
         navView.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener)
     }
 

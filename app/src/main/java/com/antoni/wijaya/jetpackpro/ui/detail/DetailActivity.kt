@@ -1,7 +1,6 @@
 package com.antoni.wijaya.jetpackpro.ui.detail
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -119,7 +118,8 @@ class DetailActivity : AppCompatActivity() {
     }
 
     private fun obtainViewModel(activity: AppCompatActivity): DetailViewModel? {
-        val factory = ViewModelFactory.getInstanceDetail(activity.application)
+        val viewModelFactory = ViewModelFactory()
+        val factory = viewModelFactory.getInstanceDetail(activity.application)
         return ViewModelProviders.of(activity, factory).get(DetailViewModel::class.java)
     }
 }

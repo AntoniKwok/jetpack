@@ -26,7 +26,7 @@ class MovieRepositoryTest {
     private var remote = mock(RemoteRepository::class.java)
     private var instantAppExecutors = mock(InstantAppExecutors::class.java)
     private val fakeMovieRepository =
-        FakeMovieRepository.getInstance(remote, local, instantAppExecutors)
+        FakeMovieRepository(remote, local, instantAppExecutors)
 
     private val movies = DataDummy.generateMovieDataDummy()
     private val tvshows = DataDummy.generateTvShowDataDummy()
@@ -41,7 +41,7 @@ class MovieRepositoryTest {
 
         `when`(local.getAllMovie()).thenReturn(dummy)
 
-        val result = LiveDataTestUtil.getValue(fakeMovieRepository?.getMovieData())
+        val result = LiveDataTestUtil.getValue(fakeMovieRepository.getMovieData())
 
         verify(local).getAllMovie()
         assertNotNull(result.data)
@@ -55,7 +55,7 @@ class MovieRepositoryTest {
 
         `when`(local.getAllTvShow()).thenReturn(dummy)
 
-        val result = LiveDataTestUtil.getValue(fakeMovieRepository?.getTvShowData())
+        val result = LiveDataTestUtil.getValue(fakeMovieRepository.getTvShowData())
 
         verify(local).getAllTvShow()
         assertNotNull(result.data)
@@ -69,7 +69,7 @@ class MovieRepositoryTest {
         dummy.value = movies[0]
 
         `when`(local.getDetailMovie(movieId)).thenReturn(dummy)
-        val result = LiveDataTestUtil.getValue(fakeMovieRepository?.getMovieDetail(movieId))
+        val result = LiveDataTestUtil.getValue(fakeMovieRepository.getMovieDetail(movieId))
 
         verify(local).getDetailMovie(movieId)
         assertNotNull(result.data)
@@ -82,7 +82,7 @@ class MovieRepositoryTest {
         dummy.value = tvshows[0]
 
         `when`(local.getDetailTvShow(tvId)).thenReturn(dummy)
-        val result = LiveDataTestUtil.getValue(fakeMovieRepository?.getTvShowDetail(tvId))
+        val result = LiveDataTestUtil.getValue(fakeMovieRepository.getTvShowDetail(tvId))
 
         verify(local).getDetailTvShow(tvId)
         assertNotNull(result.data)

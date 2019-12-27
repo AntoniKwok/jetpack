@@ -9,20 +9,20 @@ import com.antoni.wijaya.jetpackpro.ui.detail.DetailViewModel
 import com.antoni.wijaya.jetpackpro.ui.home.fragment.movie.MovieViewModel
 import com.antoni.wijaya.jetpackpro.ui.home.fragment.tvshow.TvShowViewModel
 
-class ViewModelFactory(private val movieRepository: MovieRepository?) :
+class ViewModelFactory(private val movieRepository: MovieRepository? = null) :
     ViewModelProvider.NewInstanceFactory() {
 
+    private var id = ""
 
-
-    constructor(movieRepository: MovieRepository? = null, movieId : String = "") : this(movieRepository){
+    constructor(movieRepository: MovieRepository? = null, movieId: String = "") : this(
+        movieRepository
+    ) {
         id = movieId
     }
 
     companion object {
         @Volatile
         private var INSTANCE: ViewModelFactory? = null
-
-        private var id = ""
 
         fun getInstance(application: Application): ViewModelFactory? {
             if (INSTANCE == null) {
@@ -34,19 +34,17 @@ class ViewModelFactory(private val movieRepository: MovieRepository?) :
             }
             return INSTANCE
         }
+    }
 
-        fun getInstanceDetail(application: Application): ViewModelProvider.Factory? {
-            if (INSTANCE == null) {
-                synchronized(ViewModelFactory::class.java) {
-                    if (INSTANCE == null) {
-                        INSTANCE = ViewModelFactory(Injection.provideRepository(application), id)
-                    }
+    fun getInstanceDetail(application: Application): ViewModelFactory? {
+        if (INSTANCE == null) {
+            synchronized(ViewModelFactory::class.java) {
+                if (INSTANCE == null) {
+                    INSTANCE = ViewModelFactory(Injection.provideRepository(application), id)
                 }
             }
-
-            return INSTANCE
         }
-
+        return INSTANCE
     }
 
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
