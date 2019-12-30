@@ -49,8 +49,7 @@ class DetailActivity : AppCompatActivity() {
                     }
                     Status.SUCCESS -> {
 
-                        layout.visibility = View.VISIBLE
-                        progress_bar.visibility = View.GONE
+
                         val movie = it.data
 
                         if (movie != null) {
@@ -62,9 +61,11 @@ class DetailActivity : AppCompatActivity() {
                             txt_desc.text = movie.desc
                             txt_date.text = movie.releasedDate
                             txt_genre.text = movie.genres
-                            txt_toolbar.text = movie.title
+                            supportActionBar?.title = movie.title
                             rating.rating = movie.rating?.toFloat()?.div(20) ?: 0F
                         }
+                        layout.visibility = View.VISIBLE
+                        progress_bar.visibility = View.GONE
                     }
                     Status.LOADING -> {
                         progress_bar.visibility = View.VISIBLE
@@ -98,7 +99,7 @@ class DetailActivity : AppCompatActivity() {
                             txt_desc.text = movie.desc
                             txt_date.text = movie.releasedDate
                             txt_genre.text = movie.genres
-                            txt_toolbar.text = movie.title
+                            supportActionBar?.title = movie.title
                             rating.rating = movie.rating?.toFloat()?.div(20) ?: 0F
                         }
                     }
@@ -111,15 +112,18 @@ class DetailActivity : AppCompatActivity() {
         }
 
 
-
-        btn_back.setOnClickListener {
-            finish()
-        }
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 
     private fun obtainViewModel(activity: AppCompatActivity): DetailViewModel? {
         val viewModelFactory = ViewModelFactory()
         val factory = viewModelFactory.getInstanceDetail(activity.application)
         return ViewModelProviders.of(activity, factory).get(DetailViewModel::class.java)
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return super.onSupportNavigateUp()
     }
 }

@@ -31,11 +31,6 @@ class DetailViewModelTest {
         tvViewModel = DetailViewModel(dummyTvShow.id, movieRepository)
     }
 
-    @After
-    fun tearDown() {
-
-    }
-
     @Test
     fun getMovieDetail() {
         val resource: Resource<MovieEntity> = Resource.success(dummyMovie)

@@ -1,12 +1,16 @@
 package com.antoni.wijaya.jetpackpro.ui.home.activity
 
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.antoni.wijaya.jetpackpro.R
+import com.antoni.wijaya.jetpackpro.ui.favorite.FavoriteActivity
 import com.antoni.wijaya.jetpackpro.ui.home.fragment.movie.MovieFragment
 import com.antoni.wijaya.jetpackpro.ui.home.fragment.tvshow.TvShowFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import org.jetbrains.anko.startActivity
 
 class HomeActivity : AppCompatActivity() {
 
@@ -36,6 +40,22 @@ class HomeActivity : AppCompatActivity() {
             return true
         }
         return false
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.home_menu_favorite, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+
+        when (item.itemId) {
+            R.id.btn_favorite_menu -> {
+                startActivity<FavoriteActivity>()
+            }
+        }
+
+        return super.onOptionsItemSelected(item)
     }
 
 }
