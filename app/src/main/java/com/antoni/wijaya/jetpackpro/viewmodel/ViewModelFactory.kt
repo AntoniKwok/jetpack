@@ -6,6 +6,8 @@ import androidx.lifecycle.ViewModelProvider
 import com.antoni.wijaya.jetpackpro.data.source.remote.MovieRepository
 import com.antoni.wijaya.jetpackpro.di.Injection
 import com.antoni.wijaya.jetpackpro.ui.detail.DetailViewModel
+import com.antoni.wijaya.jetpackpro.ui.favorite.fragment.movie.FavoriteMovieViewModel
+import com.antoni.wijaya.jetpackpro.ui.favorite.fragment.tvshow.FavoriteTvShowViewModel
 import com.antoni.wijaya.jetpackpro.ui.home.fragment.movie.MovieViewModel
 import com.antoni.wijaya.jetpackpro.ui.home.fragment.tvshow.TvShowViewModel
 
@@ -57,6 +59,12 @@ class ViewModelFactory(private val movieRepository: MovieRepository? = null) :
             ) as T
             modelClass.isAssignableFrom(DetailViewModel::class.java) -> DetailViewModel(
                 id, movieRepository
+            ) as T
+            modelClass.isAssignableFrom(FavoriteMovieViewModel::class.java) -> FavoriteMovieViewModel(
+                movieRepository
+            ) as T
+            modelClass.isAssignableFrom(FavoriteTvShowViewModel::class.java) -> FavoriteTvShowViewModel(
+                movieRepository
             ) as T
             else -> throw IllegalArgumentException(modelClass.name)
         }

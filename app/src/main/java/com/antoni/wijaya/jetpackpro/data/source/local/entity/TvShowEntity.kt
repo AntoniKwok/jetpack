@@ -30,6 +30,9 @@ data class TvShowEntity(
     val releasedDate: String? = "",
 
     @ColumnInfo(name = "image_url")
-    val imageUrl: String? = ""
+    val imageUrl: String? = "",
+
+    @ColumnInfo(name = "is_fav")
+    var isFav : Boolean = false
 
 )

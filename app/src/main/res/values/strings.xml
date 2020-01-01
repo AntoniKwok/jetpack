@@ -3,6 +3,7 @@
     <string name="title_movie">Movie</string>
     <string name="title_tvshow">TV Show</string>
     <string name="title_favorite">Favorite</string>
+    <string name="no_data">No Data</string>
 
     <string name="overview">Overview</string>
 

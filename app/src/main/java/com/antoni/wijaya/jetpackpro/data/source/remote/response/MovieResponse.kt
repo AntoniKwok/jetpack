@@ -11,5 +11,6 @@ data class MovieResponse(
     var genres: String = "",
     var rating: String = "",
     var releasedDate: String = "",
-    var image: String = ""
+    var image: String = "",
+    var isFav: Boolean = false
 ) : Parcelable
